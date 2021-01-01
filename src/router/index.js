@@ -4,6 +4,7 @@ import Center from '@/views/Center'
 import Film from '@/views/Film'
 import Cinema from '@/views/Cinema'
 import Detail from '@/views/Detail'
+import City from '@/views/City'
 import Nowplaying from '@/views/Film/Nowplaying'
 import Comingsoon from '@/views/Film/Comingsoon'
 Vue.use(VueRouter)
@@ -41,6 +42,10 @@ const routes = [
     name: 'haha',
     component: Detail,
     props: true
+  },
+  {
+    path: '/city',
+    component: City
   },
   // 重定向 当以上都不匹配时 重定向到film页面
   {

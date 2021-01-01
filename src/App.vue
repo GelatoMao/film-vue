@@ -1,29 +1,40 @@
 <template>
   <div class="">
-    <Tabbar></Tabbar>
+    <tabbar v-show="isTabbarShow"></tabbar>
     <!-- 路由容器 -->
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Sidebar from "./components/Sidebar.vue";
-import Navbar from "./components/Navbar.vue";
-import Tabbar from "@/components/Tabbar";
+import tabbar from "@/components/Tabbar";
+//ES6导出
+import { mapState } from "vuex";
+// import bus from "@/bus";
 
 export default {
   name: "",
   components: {
-    Tabbar
+    tabbar
   },
   props: {},
   data() {
-    return {};
+    return {
+      // isShow: true
+    };
   },
-  computed: {},
+  computed: {
+    //ES6展开合并运算符
+    ...mapState(["isTabbarShow"])
+  },
   watch: {},
   created() {},
-  mounted() {},
+  // beforeMount() {
+  //   bus.$on("maizuo", data => {
+  //     // console.log("被通知了", data);
+  //     this.isShow = data;
+  //   });
+  // },
   methods: {}
 };
 </script>

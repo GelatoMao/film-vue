@@ -1,6 +1,7 @@
 <template>
   <div class="film">
-    <swiper :key="looplist.length" ref="myswiper">
+    <!-- :key="looplist.length" -->
+    <swiper ref="myswiper">
       <div class="swiper-slide" v-for="data in looplist" :key="data.bannerId">
         <img :src="data.imgUrl" />
       </div>
@@ -14,7 +15,9 @@
 <script>
 import swiper from "@/views/Film/Swiper";
 import filmheader from "@/views/Film/FilmHeader";
+import { Indicator } from "mint-ui";
 import axios from "axios";
+
 export default {
   name: "",
   components: {
@@ -32,6 +35,10 @@ export default {
   watch: {},
   created() {},
   mounted() {
+    Indicator.open({
+      text: "加载中...",
+      spinnerType: "fading-circle"
+    });
     axios({
       url: "https://m.maizuo.com/gateway?type=2&cityId=310100&k=6214978",
       headers: {
@@ -41,7 +48,7 @@ export default {
       }
     }).then(res => {
       this.looplist = res.data.data;
-      console.log(res.data);
+      Indicator.close();
     });
     // 单独写一个方法来封装监听 需要让onscroll这个事件只活在film组件中，而不影响其他组件
     //只有在当前这个组件中挂载这个事件，一离开这个组件，就解绑该组件 使用beforeDestroy这个生命周期函数
